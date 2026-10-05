@@ -12,7 +12,7 @@ let selectedCategory;
 // CACHED ELEMENTS
 
 const categorySelectEl = document.getElementById("category-select");
-// console.log(categorySelectEl);
+console.log(categorySelectEl);
 const questionTextEl = document.getElementById("question");
 // console.log(questionTextEl);
 const answersButtonEl = document.querySelectorAll("#offered-answers .btn");
@@ -24,38 +24,60 @@ console.dir(allAnswersArr);
 
 // FUNCTIONS
 
-// function checkCategory(event) {
+//display question and answers
+//--------------------------
+
+function displayQuestion() {
     
-// };
+    const currQuestionObj = quizData[selectedCategory][questionIdx];
+    questionTextEl.textContent = currQuestionObj.question; // here fills the question
+    
+    allAnswersArr.forEach((btn, index) => { 
+        btn.textContent = currQuestionObj.answers[index];
+        btn.classList.remove("correct", "wrong");
+        // ...
+    });
+}
 
-// function checkAnswer(event) {
-//     
-// };
-
-
-// EVENT LISTENERS
-
-categorySelectEl.addEventListener("change", function(event) {
+function checkCategory(event) {
     selectedCategory = event.target.value.toLowerCase();
     if (!selectedCategory || !quizData[selectedCategory]) return; //if chooses nothing
-    questionTextEl.textContent = quizData[selectedCategory][questionIdx].question; // here fills the question
-    allAnswersArr.forEach((btn, index) => { 
-        btn.textContent = quizData[selectedCategory][questionIdx].answers[index];
-    });
-});
+    
+    questionIdx = 0;
+    displayQuestion();
+};
 
-allAnswersArr.forEach((btn, index) => {
-    btn.addEventListener("click", function(event) {
-    // console.log(event.target);
-    // console.log(event.currentTarget);
-    if(Number(btn.id) === quizData[selectedCategory][questionIdx].correctIndex) {
+function checkAnswer(event) {
+    const btn = event.currentTarget; 
+    const correctIdx = quizData[selectedCategory][questionIdx].correctIndex;
+    if(Number(btn.id) === correctIdx) {
         btn.classList.add("correct");
     } else {
         btn.classList.add("wrong");
-        allAnswersArr[quizData[selectedCategory][questionIdx].correctIndex].classList.add("correct");
+        allAnswersArr[correctIdx].classList.add("correct");
     }
-    });
-});
+    };
+    
+    //==============================
+    //==============================
+    //==============================
+
+        
+        // EVENT LISTENERS
+        
+        categorySelectEl.addEventListener("change", checkCategory);
+        
+        allAnswersArr.forEach((btn, index) => {
+            btn.addEventListener("click", checkAnswer);
+        });
+
+    // if(questionIdx < quizData[selectedCategory].length - 1) {
+    // questionIdx +=1;
+    // } else {
+    // questionIdx = 0;
+    // alert("This set of question is over!");
+    // }
+
 
 
 
