@@ -1,0 +1,8 @@
+.correct {
+    background-color: #28a745 !important; /* Zelena boja */
+    color: white;
+}
+.wrong {
+    background-color: #de2510 !important; /* crvena boja */
+    color: white;
+}

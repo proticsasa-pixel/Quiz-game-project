@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz game</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer src="./js/app.js"></script>
+    <script defer src="./data/data.js"></script>
+  </head>
+  <body>
+
+    <!-- Greetings -->
+
+    <section id="quiz-theme">
+      <h1>Welcome To Quiz</h1>
+
+      <!-- space for points -->
+
+      <div id="score">
+        <p id="live-score">Won points: <span>0</span></p>
+        <div id="all-final-scores">
+          <p id="final-scores">Final scores:</p>
+          <!-- Just three categories for now -->
+          <p id="cat-1_points">Geography: <span>0</span> points</p>
+          <p id="cat-2_points">History: <span>0</span> points</p>
+          <p id="cat-3_points">Science: <span>0</span> points</p>
+          <p id="total_points">TOTAL: <span>0</span> points</p>
+        </div>
+      </div>
+
+      <!-- space for question -->
+
+      <div id="question-box">
+        <p id="question">Here goes question to answer</p>
+      </div>
+    </section>
+
+    <!-- space for choosing categories -->
+
+    <div id="choose-category">
+      <label for="category-select">Choose a category:</label>
+      <select name="category" id="category-select">
+        <option value="">--Please choose a category --</option>
+        <option value="geography">Geography</option>
+        <option value="history">History</option>
+        <option value="science">Science</option>
+      </select>
+    </div>
+
+    <!-- multiple-choice answers -->
+
+    <h2>Offered Answers:</h2>
+    <section id="offered-answers" class="btn-grid">
+      <button class="btn" id="0">A</button>
+      <button class="btn" id="1">B</button>
+      <button class="btn" id="2">C</button>
+      <button class="btn" id="3">D</button>
+    </section>
+  </body>
+</html>
