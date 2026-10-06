@@ -31,7 +31,7 @@ const totalPointsSpanEl = document.querySelector("#total_points span");
 
 function displayQuestion() {
     const currQuestionObj = quizData[selectedCategory][questionIdx];
-    questionTextEl.textContent = currQuestionObj.question; // here fills the question
+    questionTextEl.textContent = currQuestionObj.question; // ovdje upisujem pitanje
     
     allAnswersArr.forEach((btn, index) => {
         btn.textContent = currQuestionObj.answers[index];
@@ -103,8 +103,16 @@ function isCategoryFinished() {
         liveScore = 0;
         questionIdx = 0;
 
-        const totalCategoriesCount = Object.keys(quizData).length;
+        // provera da li je prosao sve kategorije
 
+        const totalCategoriesCount = Object.keys(quizData).length;
+        if (completedCategories.length === totalCategoriesCount) {
+            questionTextEl.textContent = "C O N G R A T U L A T I O S! You have completed Quiz!";
+            allAnswersArr.forEach(btn => btn.textContent = "-");
+            categorySelectEl.value = "";
+        } else {
+            // questionTextEl.textContent = "This set of questions is over! Choose another category!";
+        }
     }
 
 }
