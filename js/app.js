@@ -23,6 +23,8 @@ const hisPointsSpanEl = document.querySelector("#cat-2_points span");
 const sciPointsSpanEl = document.querySelector("#cat-3_points span");
 const totalPointsSpanEl = document.querySelector("#total_points span");
 
+const resetBtnEl = document.getElementById("reset-btn");
+
 
 // FUNCTIONS ========================
 
@@ -33,6 +35,9 @@ function displayQuestion() {
     const currQuestionObj = quizData[selectedCategory][questionIdx];
     questionTextEl.textContent = currQuestionObj.question; // ovdje upisujem pitanje
     
+    // quitBtnEl.classList.remove("hidden");
+    resetBtnEl.classList.remove("hidden");
+
     allAnswersArr.forEach((btn, index) => {
         btn.textContent = currQuestionObj.answers[index];
         btn.classList.remove("correct", "wrong");
@@ -45,8 +50,28 @@ function displayQuestion() {
 
 function checkCategory(event) {
     selectedCategory = event.target.value.toLowerCase();
-    if (!selectedCategory || !quizData[selectedCategory]) return; //if chooses nothing
+    if (!selectedCategory || !quizData[selectedCategory]) return;
+
+    const totalCategoriesCount = Object.keys(quizData).length;
+    if (completedCategories.length === totalCategoriesCount) {
+        liveScore = 0;
+        cat_1_Score = 0;
+        cat_2_Score = 0;
+        cat_3_Score = 0;
+        totalScore = 0;
+        completedCategories = []; // Praznimo niz završenih kategorija
+        updateScores();
+    }
+    
+    if (completedCategories.includes(selectedCategory)) {
+        questionTextEl.textContent = "You finished this one. Choose another";
+        allAnswersArr.forEach(btn => btn.textContent = "-");
+        return;
+    }
+
     questionIdx = 0;
+    liveScore = 0;
+    updateScores();
     displayQuestion();
 }
 
@@ -78,8 +103,8 @@ function checkAnswer(event) {
         btn.classList.add("wrong");
         allAnswersArr[correctIdx].classList.add("correct");
     }
+    updateScores();
     setTimeout(isCategoryFinished, 850);
-    setTimeout(updateScores, 850);// postavi nove rezultate!!!
 }
 
 // input new question from category
@@ -97,11 +122,12 @@ function isCategoryFinished() {
     if (selectedCategory === "science") cat_3_Score = liveScore;
     
     if (!completedCategories.includes(selectedCategory)) {
-        completedCategories.push(selectedCategory);
+            completedCategories.push(selectedCategory);
     }
 
         liveScore = 0;
         questionIdx = 0;
+        updateScores();
 
         // provera da li je prosao sve kategorije
 
@@ -110,11 +136,39 @@ function isCategoryFinished() {
             questionTextEl.textContent = "C O N G R A T U L A T I O S! You have completed Quiz!";
             allAnswersArr.forEach(btn => btn.textContent = "-");
             categorySelectEl.value = "";
+            resetBtnEl.classList.add("hidden");
         } else {
-            // questionTextEl.textContent = "This set of questions is over! Choose another category!";
+            questionTextEl.textContent = "This set of questions is over! Choose another category!";
+            allAnswersArr.forEach(btn => btn.textContent = "-");
         }
     }
 
+}
+
+function resetFullQuiz(){
+    
+    
+    liveScore = 0;
+    cat_1_Score = 0;
+    cat_2_Score = 0;
+    cat_3_Score = 0;
+    totalScore = 0;
+    questionIdx = 0;
+    completedCategories = [];
+    selectedCategory = null;
+    
+    categorySelectEl.value = ""; 
+    questionTextEl.textContent = "Please select a category to start the quiz!";
+    updateScores();
+    
+    // Sakrij kontrolnu dugmad dok se opet ne izabere kategorija
+    
+    resetBtnEl.classList.add("hidden");
+    
+    allAnswersArr.forEach(btn => {
+        btn.textContent = "-";
+        btn.classList.remove("correct", "wrong", "disabled-click");
+    });
 }
 
 // EVENT LISTENERS ==========================
@@ -125,3 +179,4 @@ allAnswersArr.forEach((btn, index) => {
   btn.addEventListener("click", checkAnswer);
 });
 
+resetBtnEl.addEventListener("click", resetFullQuiz);
