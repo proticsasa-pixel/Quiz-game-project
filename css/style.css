@@ -1,3 +1,207 @@
+/* Osnovna resetovanja i font */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9; 
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Naslov */
+h1 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #1a82e4; 
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #34495e; 
+  text-align: center;
+}
+
+/* #quiz-theme, #choose-category, #offered-answers {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Nežnija senka */
+} */
+
+
+#quiz-theme,
+#choose-category,
+#offered-answers {
+  background: #ffffff;
+  /* Kutije 600
+  width: 600px; 
+    max-width: 100%; /* */
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Poeni i rezultat */
+#score {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+#final-score {
+}
+
+#live-score span,
+#all-final-scores span {
+  color: #27ae60;
+}
+
+#all-final-scores p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+#all-final-scores p#total_points {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 5px;
+}
+
+/* Kutija za pitanje */
+#question-box {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+#question {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+/* Izbor kategorije */
+#choose-category {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#choose-category label {
+  font-weight: 600;
+  color: #7f8c8d;
+}
+
+#category-select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #bdc3c7;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+}
+
+#category-select:focus {
+  border-color: #3498db;
+}
+
+/* PonuÄ‘eni odgovori (Grid 2x2) */
+#offered-answers h2 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: #7f8c8d;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* Tasteri za odgovore */
+.btn {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Responzivnost za manje ekrane */
+@media (max-width: 480px) {
+  .btn-grid {
+    grid-template-columns: 1fr; /* Na telefonima odgovori idu jedan ispod drugog */
+  }
+
+  #score {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+/* Stil za početnu stranu */
+#start-screen {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-top: 50px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#start-screen p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+#start-btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  background-color: #27ae60; /* Zeleno dugme za početak igre! */
+}
+
+#start-btn:hover {
+  background-color: #219653;
+}
+
+
+
+
+
 .correct {
     background-color: #28a745 !important; /* Zelena boja */
     color: white;
@@ -13,4 +217,45 @@
 }
 .hidden {
     display: none !important;
+}
+
+
+
+/* Stil za Quit dugme */
+#quit-btn {
+  background-color: #de2510; /* Tvoja crvena boja */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#quit-btn:hover {
+  background-color: #b81d0c;
+}
+
+/* Stil za Thanks for */
+#end-screen {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-top: 50px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#end-screen p {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+#restart-from-end-btn {
+  background-color: #28a745; /**/
 }

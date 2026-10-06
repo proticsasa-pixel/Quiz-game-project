@@ -26,6 +26,18 @@ const totalPointsSpanEl = document.querySelector("#total_points span");
 const resetBtnEl = document.getElementById("reset-btn");
 
 
+const startScreenEl = document.getElementById("start-screen");
+const startBtnEl = document.getElementById("start-btn");
+const mainQuizContainerEl = document.getElementById("main-quiz-container");
+
+
+const quitBtnEl = document.getElementById("quit-btn");
+const endScreenEl = document.getElementById("end-screen");
+const restartFromEndBtnEl = document.getElementById("restart-from-end-btn");
+
+
+
+
 // FUNCTIONS ========================
 
 //display question and answers
@@ -35,8 +47,8 @@ function displayQuestion() {
     const currQuestionObj = quizData[selectedCategory][questionIdx];
     questionTextEl.textContent = currQuestionObj.question; // ovdje upisujem pitanje
     
-    // quitBtnEl.classList.remove("hidden");
     resetBtnEl.classList.remove("hidden");
+    quitBtnEl.classList.remove("hidden");
 
     allAnswersArr.forEach((btn, index) => {
         btn.textContent = currQuestionObj.answers[index];
@@ -147,7 +159,6 @@ function isCategoryFinished() {
 
 function resetFullQuiz(){
     
-    
     liveScore = 0;
     cat_1_Score = 0;
     cat_2_Score = 0;
@@ -164,12 +175,43 @@ function resetFullQuiz(){
     // Sakrij kontrolnu dugmad dok se opet ne izabere kategorija
     
     resetBtnEl.classList.add("hidden");
+    // quitBtnEl.classList.add("hidden");
     
     allAnswersArr.forEach(btn => {
         btn.textContent = "-";
         btn.classList.remove("correct", "wrong", "disabled-click");
     });
 }
+
+
+
+//Funkcija za prekid igre preko Quit dugmeta
+function quitGame() {
+    if (selectedCategory) {
+        // Prebacujemo trenutne bodove u finalne pre nego što ugasimo igru
+        if (selectedCategory === "geography") cat_1_Score = liveScore;
+        if (selectedCategory === "history") cat_2_Score = liveScore;
+        if (selectedCategory === "science") cat_3_Score = liveScore;
+            }
+
+
+    liveScore = 0;
+    updateScores(); // Izračunava konačan TOTAL
+
+    // Sakrivamo glavni kviz, prikazujemo "Thanks for playing" ekran
+    mainQuizContainerEl.classList.add("hidden");
+    endScreenEl.classList.remove("hidden");
+}
+
+//Kada klikne "Play Again" sa završnog ekrana, radi se puni reset
+function restartAfterQuit() {
+    endScreenEl.classList.add("hidden"); // Sakrij thanks screen
+    resetFullQuiz();                    // Resetuj sve bodove na nulu
+    startScreenEl.classList.remove("hidden"); // PRIKAŽI PONOVO POČETNI EKRAN!
+}
+
+
+
 
 // EVENT LISTENERS ==========================
 
@@ -180,3 +222,14 @@ allAnswersArr.forEach((btn, index) => {
 });
 
 resetBtnEl.addEventListener("click", resetFullQuiz);
+
+
+// Start dugme skriva početni ekran i prikaži kviz
+startBtnEl.addEventListener("click", function() {
+    startScreenEl.classList.add("hidden");
+    mainQuizContainerEl.classList.remove("hidden");
+});
+
+// POVEZIVANJE QUIT i restart
+quitBtnEl.addEventListener("click", quitGame);
+restartFromEndBtnEl.addEventListener("click", restartAfterQuit);

@@ -9,61 +9,79 @@
     <script defer src="./js/app.js"></script>
   </head>
   <body>
+    
+        <section id="start-screen">
+      <h1>Welcome to the Ultimate Quiz Game!</h1>
+      <p>Test your knowledge.</p>
+      <button id="start-btn" class="btn">Start Quiz</button>
+    </section>
 
-    <!-- Greetings -->
 
-    <section id="quiz-theme">
-      <h1>Welcome To Quiz</h1>
 
-      <!-- space for points -->
+    <div id="main-quiz-container" class="hidden">
 
-      <div id="score">
-        <p id="live-score">Won points: <span>0</span></p>
-        <div id="all-final-scores">
-          <p id="final-scores">Final scores:</p>
-          <!-- Just three categories for now -->
-          <p id="cat-1_points">Geography: <span>0</span> points</p>
-          <p id="cat-2_points">History: <span>0</span> points</p>
-          <p id="cat-3_points">Science: <span>0</span> points</p>
-          <p id="total_points">TOTAL: <span>0</span> points</p>
+
+      <!-- Greetings -->
+
+      <section id="quiz-theme">
+        <h1>Welcome To Quiz</h1>
+
+        <!-- space for points -->
+
+        <div id="score">
+          <p id="live-score">Won points: <span>0</span></p>
+          <div id="all-final-scores">
+            <p id="final-scores">Final scores:</p>
+            <!-- Just three categories for now -->
+            <p id="cat-1_points">Geography: <span>0</span> points</p>
+            <p id="cat-2_points">History: <span>0</span> points</p>
+            <p id="cat-3_points">Science: <span>0</span> points</p>
+            <p id="total_points">TOTAL: <span>0</span> points</p>
+          </div>
         </div>
+
+        <!-- space for question -->
+
+        <div id="question-box">
+          <p id="question">Here goes question to answer</p>
+        </div>
+      </section>
+
+      <!-- space for choosing categories -->
+
+      <div id="choose-category">
+        <label for="category-select">Choose a category:</label>
+        <select name="category" id="category-select">
+          <option value="">--Please choose a category --</option>
+          <option value="geography">Geography</option>
+          <option value="history">History</option>
+          <option value="science">Science</option>
+        </select>
       </div>
 
-      <!-- space for question -->
+      <!-- quit and reset buttons -->
 
-      <div id="question-box">
-        <p id="question">Here goes question to answer</p>
+      <div id="quiz-controls">
+        <button id="quit-btn" class="control-btn hidden";">Quit Game</button>
+        <button id="reset-btn" class="control-btn hidden">Reset Quiz</button>
       </div>
-    </section>
 
-    <!-- space for choosing categories -->
+      <!-- multiple-choice answers -->
 
-    <div id="choose-category">
-      <label for="category-select">Choose a category:</label>
-      <select name="category" id="category-select">
-        <option value="">--Please choose a category --</option>
-        <option value="geography">Geography</option>
-        <option value="history">History</option>
-        <option value="science">Science</option>
-      </select>
+      <h2>Offered Answers:</h2>
+      <section id="offered-answers" class="btn-grid">
+        <button class="btn" id="0">A</button>
+        <button class="btn" id="1">B</button>
+        <button class="btn" id="2">C</button>
+        <button class="btn" id="3">D</button>
+      </section>
     </div>
 
-
-    <!-- quit and reset buttons -->
-
-<div id="quiz-controls">
-      <!-- <button id="quit-btn" class="control-btn hidden";">Quit Game</button> -->
-      <button id="reset-btn" class="control-btn hidden">Reset Quiz</button>
-    </div>
-
-    <!-- multiple-choice answers -->
-
-    <h2>Offered Answers:</h2>
-    <section id="offered-answers" class="btn-grid">
-      <button class="btn" id="0">A</button>
-      <button class="btn" id="1">B</button>
-      <button class="btn" id="2">C</button>
-      <button class="btn" id="3">D</button>
+    <section id="end-screen" class="hidden">
+      <h1>Thanks for playing!</h1>
+      <p id="final-thanks-message">You have left the quiz.</p>
+      <button id="restart-from-end-btn" class="btn">Play Again</button>
     </section>
+    
   </body>
-</html>
+  </html>
