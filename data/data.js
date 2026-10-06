@@ -41,7 +41,4 @@ science: [
         correctIndex:2,
     },
 ],
-checkAndColor: function() {
-
-},
 };
