@@ -1,4 +1,6 @@
-/* Osnovna resetovanja i font */
+/* ==========================================================================
+   1. OSNOVNA RESETOVANJA I GLOBALNI STILOVI
+   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +18,7 @@ body {
   min-height: 100vh;
 }
 
-/* Naslov */
+/* Tipografija */
 h1 {
   margin-top: 10px;
   margin-bottom: 20px;
@@ -25,78 +27,43 @@ h1 {
 }
 
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #34495e; 
   text-align: center;
 }
 
-/* #quiz-theme, #choose-category, #offered-answers {
+/* ==========================================================================
+   2. GLAVNE STRUKTURNE KUTIJE (FIKSIRANA ŠIRINA NA 750px)
+   ========================================================================== */
+.quiz-box, 
+#start-screen, 
+#end-screen {
   background: #ffffff;
-  width: 100%;
-  max-width: 600px;
+  width: 750px;         /* Strogo fiksirana širina od samog početka */
+  min-width: 750px;     /* Sprečava skupljanje kutije tokom promene pitanja */
+  max-width: 100%;      /* Omogućava responzivnost na manjim ekranima */
   border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Nežnija senka */
-} */
-
-
-#quiz-theme,
-#choose-category,
-#offered-answers {
-  background: #ffffff;
-  /* Kutije 600
-  width: 600px; 
-    max-width: 100%; /* */
-  border-radius: 12px;
-  padding: 20px;
+  padding: 30px;
   margin-bottom: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Poeni i rezultat */
-#score {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  font-weight: 600;
+/* Unutrašnje sekcije uklanjaju sopstvene pozadine jer su unutar zajedničke kutije */
+#quiz-theme,
+#choose-category,
+#offered-answers {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
-#final-score {
-}
+/* ==========================================================================
+   3. UNUTRAŠNJE KOMPONENTE KVIZA (OD VRHA DO DNA)
+   ========================================================================== */
 
-#live-score span,
-#all-final-scores span {
-  color: #27ae60;
-}
-
-#all-final-scores p {
-  font-size: 0.9rem;
-  color: #7f8c8d;
-}
-
-#all-final-scores p#total_points {
-  font-weight: bold;
-  color: #2c3e50;
-  margin-top: 5px;
-}
-
-/* Kutija za pitanje */
-#question-box {
-  text-align: center;
-  padding: 20px 10px;
-}
-
-#question {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #34495e;
-}
-
-/* Izbor kategorije */
+/* 3.1 Izbor kategorije */
 #choose-category {
   display: flex;
   flex-direction: column;
@@ -121,7 +88,28 @@ h2 {
   border-color: #3498db;
 }
 
-/* PonuÄ‘eni odgovori (Grid 2x2) */
+/* 3.2 Kutija za pitanje (Sada sa upečatljivom pozadinom i ivicom) */
+#question-box {
+  text-align: center;
+  padding: 20px 15px;
+  min-height: 100px;    
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f7ff; 
+  border-left: 5px solid #1a82e4; 
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+#question {
+  font-size: 1.35rem;     
+  font-weight: 700;       
+  color: #de2510;         
+  line-height: 1.4;
+}
+
+/* 3.3 Ponuđeni odgovori (Mreža 2x2) */
 #offered-answers h2 {
   font-size: 1.1rem;
   margin-bottom: 15px;
@@ -134,7 +122,83 @@ h2 {
   gap: 12px;
 }
 
-/* Tasteri za odgovore */
+/* 3.4 Tabela sa poenima (ZVEZDA POPRAVKE: Potpuno razdvojene leve i desne kartice) */
+#score {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;          
+  border-top: 2px solid #ecf0f1; 
+  padding-top: 25px;
+  margin-top: 25px; 
+  margin-bottom: 15px;
+}
+
+#live-score {
+  flex: 1;              
+  background-color: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a82e4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#live-score span {
+  font-size: 2rem;      
+  color: #28a745;       
+  margin-top: 5px;
+}
+
+#all-final-scores {
+  flex: 1;              
+  background-color: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: left;
+}
+
+#final-scores {
+  font-weight: 700;
+  color: #34495e;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 5px;
+}
+
+#all-final-scores p {
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  margin: 4px 0;
+}
+
+#all-final-scores p#total_points {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 1.05rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 5px;
+  margin-top: 8px;
+}
+
+/* 3.5 Kontrolna dugmad na samom dnu */
+#quiz-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   4. SVUDA PRIMENLJIVI TASTERI (BUTTONS)
+   ========================================================================== */
 .btn {
   background-color: #3498db;
   color: #ffffff;
@@ -144,9 +208,7 @@ h2 {
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    transform 0.1s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn:hover {
@@ -157,10 +219,109 @@ h2 {
   transform: scale(0.98);
 }
 
-/* Responzivnost za manje ekrane */
-@media (max-width: 480px) {
+/* Posebni stilovi za kontrolne tastere */
+.control-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#quit-btn {
+  background-color: #de2510;
+}
+
+#quit-btn:hover {
+  background-color: #b81d0c;
+}
+
+#reset-btn {
+  background-color: #2a9be7;
+}
+
+#reset-btn:hover {
+  background-color: #1b85ca;
+}
+
+/* Specifična dugmad na startnom i krajnjem ekranu (Centrirano) */
+#start-screen, 
+#end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#start-screen p, 
+#end-screen p {
+  color: #7f8c8d;
+  margin-bottom: 35px;
+}
+
+#start-btn, 
+#restart-from-end-btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  background-color: #28a745;
+}
+
+#start-btn:hover, 
+#restart-from-end-btn:hover {
+  background-color: #218838;
+}
+
+/* ==========================================================================
+   5. DINAMIČKE KLASE ZA JAVASCRIPT
+   ========================================================================== */
+.correct {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+.wrong {
+  background-color: #de2510 !important;
+  color: white !important;
+}
+
+.disabled-click {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.category-over {
+  background-color: #fef9e7 !important; 
+  border-left: 5px solid #f39c12 !important; 
+  transition: all 0.3s ease;
+}
+
+.category-over #question {
+  color: #de2510 !important;
+  font-size: 1.45rem;
+}
+
+/* ==========================================================================
+   6. RESPONZIVNOST ZA MOBILNE TELEFONE
+   ========================================================================== */
+@media (max-width: 768px) {
+  .quiz-box, 
+  #start-screen, 
+  #end-screen {
+    width: 100%;
+    min-width: 100%;
+    padding: 20px;
+  }
+
   .btn-grid {
-    grid-template-columns: 1fr; /* Na telefonima odgovori idu jedan ispod drugog */
+    grid-template-columns: 1fr; 
   }
 
   #score {
@@ -170,92 +331,13 @@ h2 {
 }
 
 
-/* Stil za početnu stranu */
-#start-screen {
-  background: #ffffff;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 12px;
-  padding: 40px 20px;
-  margin-top: 50px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Efekat podrhtavanja za pogrešan klik */
+.shake-animation {
+  animation: shake 0.4s ease-in-out;
 }
 
-#start-screen p {
-  color: #7f8c8d;
-  font-size: 1.1rem;
-  margin-bottom: 30px;
-}
-
-#start-btn {
-  padding: 15px 40px;
-  font-size: 1.2rem;
-  background-color: #27ae60; /* Zeleno dugme za početak igre! */
-}
-
-#start-btn:hover {
-  background-color: #219653;
-}
-
-
-
-
-
-.correct {
-    background-color: #28a745 !important; /* Zelena boja */
-    color: white;
-}
-.wrong {
-    background-color: #de2510 !important; /* crvena boja */
-    color: white;
-}
-.disabled-click {
-    pointer-events: none;
-    cursor: not-allowed;/* 🚫 */
-    opacity: 0.6;
-}
-.hidden {
-    display: none !important;
-}
-
-
-
-/* Stil za Quit dugme */
-#quit-btn {
-  background-color: #de2510; /* Tvoja crvena boja */
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-#quit-btn:hover {
-  background-color: #b81d0c;
-}
-
-/* Stil za Thanks for */
-#end-screen {
-  background: #ffffff;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 12px;
-  padding: 40px 20px;
-  margin-top: 50px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#end-screen p {
-  color: #7f8c8d;
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
-
-#restart-from-end-btn {
-  background-color: #28a745; /**/
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
 }
