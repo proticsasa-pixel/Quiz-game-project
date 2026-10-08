@@ -13,6 +13,7 @@
 * Javascript
 * HTML
 * CSS
+* GitHub
 ***
 
 ### ***Getting Started***
@@ -30,6 +31,7 @@
 - [ ] Stiring of answers i next round.
 - [ ] Larger category base.
 - [ ] Limit time for answer
+- [ ] Add users to compete
 ***
 
 ### ***Screenshots***
@@ -43,6 +45,6 @@
 ***
 
 ### ***Credits***
-#### Pictures: 
+#### Audios: Pexels
 #### Die animation:
 #### Background: 
